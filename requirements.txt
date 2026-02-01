@@ -7,13 +7,10 @@ streamlit>=1.28.0
 # Calcul scientifique
 numpy>=1.24.0
 pandas>=2.0.0
+matplotlib>=3.7.0  # ← AJOUT OBLIGATOIRE (nécessaire pour background_gradient)
 
 # Visualisation
 plotly>=5.17.0
 
 # Lecture/Écriture de fichiers
 openpyxl>=3.1.0
-
-# Optionnel - pour les tests
-# pytest>=7.4.0
-# pytest-cov>=4.1.0
