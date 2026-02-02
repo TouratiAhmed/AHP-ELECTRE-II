@@ -7,6 +7,7 @@ import plotly.express as px
 from io import BytesIO
 import openpyxl
 import json
+import time
 
 # Configuration de la page
 st.set_page_config(page_title="AHP & ELECTRE II", layout="wide")
@@ -17,7 +18,7 @@ if 'poids_ahp' not in st.session_state:
 if 'noms_criteres_ahp' not in st.session_state:
     st.session_state.noms_criteres_ahp = None
 if 'page_actuelle' not in st.session_state:
-    st.session_state.page_actuelle = "🏠 Accueil"
+    st.session_state.page_actuelle = " Accueil"
 if 'mode_saisie' not in st.session_state:
     st.session_state.mode_saisie = None
 if 'donnees_chargees' not in st.session_state:
@@ -44,7 +45,7 @@ st.markdown("### AHP et ELECTRE II")
 methode = st.sidebar.selectbox(
     "Choisir la méthode",
     [" Accueil", " Choix des données", " AHP - Analytic Hierarchy Process", " ELECTRE II"],
-    index=[" Accueil", " Choix des données", " AHP - Analytic Hierarchy Process", " ELECTRE II"].index(st.session_state.page_actuelle) if st.session_state.page_actuelle in [" Accueil", " Choix des données", " AHP - Analytic Hierarchy Process", " ELECTRE II"] else 0
+    index=[" Accueil", " Choix des données", " AHP - Analytic Hierarchy Process", " ELECTRE II"].index(st.session_state.page_actuelle) if st.session_state.page_actuelle in ["🏠 Accueil", "📊 Choix des données", "⚖️ AHP - Analytic Hierarchy Process", "🎯 ELECTRE II"] else 0
 )
 st.session_state.page_actuelle = methode
 
@@ -164,9 +165,9 @@ def create_draggable_bar_chart(noms_criteres, poids_pourcentage):
         <div class="controls" id="controls"></div>
         
         <div style="margin-top: 20px;">
-            <button onclick="resetWeights()"> Réinitialiser</button>
-            <button onclick="equalWeights()"> Poids égaux</button>
-            <button onclick="exportWeights()"> Exporter les poids</button>
+            <button onclick="resetWeights()">🔄 Réinitialiser</button>
+            <button onclick="equalWeights()">⚖️ Poids égaux</button>
+            <button onclick="exportWeights()">💾 Exporter les poids</button>
         </div>
         
         <script>
@@ -916,10 +917,10 @@ if methode == " Accueil":
     ---
     
     **Instructions :** 
-    1. Allez dans **Choix des données** pour charger ou saisir vos données
-    2. Utilisez **AHP** pour déterminer les poids de vos critères
+    1. Allez dans ** Choix des données** pour charger ou saisir vos données
+    2. Utilisez ** AHP** pour déterminer les poids de vos critères
     3. **Glissez les barres du graphique** pour ajuster interactivement
-    4. Utilisez **ELECTRE II** pour classer vos alternatives avec surclassement fort/faible
+    4. Utilisez ** ELECTRE II** pour classer vos alternatives avec surclassement fort/faible
     """)
     
     col1, col2 = st.columns(2)
@@ -936,14 +937,14 @@ if methode == " Accueil":
     with col2:
         if st.session_state.poids_ahp is not None:
             st.success("""
-             **Poids AHP disponibles !**
+            ✅ **Poids AHP disponibles !**
             
             Vous avez déjà calculé des poids avec AHP.
             Allez dans ELECTRE II pour les utiliser.
             """)
         else:
             st.warning("""
-             **Aucun poids AHP calculé**
+            ⚠️ **Aucun poids AHP calculé**
             
             Commencez par la méthode AHP pour
             déterminer les poids de vos critères.
@@ -989,14 +990,14 @@ elif methode == " Choix des données":
             st.rerun()
     
     with col3:
-        st.markdown("####  Passer")
+        st.markdown("#### ⏭️ Passer")
         st.markdown("""
         Utiliser les données
         déjà saisies ou
         continuer plus tard
         """)
-        if st.button(" Passer cette étape", use_container_width=True):
-            st.session_state.page_actuelle = " AHP - Analytic Hierarchy Process"
+        if st.button("⏭️ Passer cette étape", use_container_width=True):
+            st.session_state.page_actuelle = "⚖️ AHP - Analytic Hierarchy Process"
             st.rerun()
     
     st.markdown("---")
@@ -1012,7 +1013,7 @@ elif methode == " Choix des données":
         )
         
         if uploaded_file is not None:
-            st.success(f" Fichier chargé : {uploaded_file.name}")
+            st.success(f"✅ Fichier chargé : {uploaded_file.name}")
             
             file_extension = uploaded_file.name.split('.')[-1].lower()
             
@@ -1037,12 +1038,12 @@ elif methode == " Choix des données":
                 st.subheader(" Aperçu et Configuration des données chargées")
                 
                 for sheet_name, df in donnees.items():
-                    with st.expander(f" Feuille : {sheet_name}", expanded=True):
+                    with st.expander(f"📄 Feuille : {sheet_name}", expanded=True):
                         st.markdown("##### Aperçu des données")
                         st.dataframe(df.head(10), use_container_width=True)
                         
                         st.markdown("---")
-                        st.markdown("#####  Configuration de l'orientation des données")
+                        st.markdown("##### 🔄 Configuration de l'orientation des données")
                         
                         st.info("""
                         **Comment sont organisées vos données ?**
@@ -1075,7 +1076,7 @@ elif methode == " Choix des données":
                                 st.write(donnees_extraites['criteres'])
                                 st.metric("Nombre", len(donnees_extraites['criteres']))
                             
-                            st.markdown("** Matrice des performances:**")
+                            st.markdown("**📈 Matrice des performances:**")
                             df_perf_preview = pd.DataFrame(
                                 donnees_extraites['performances'],
                                 columns=donnees_extraites['criteres'],
@@ -1086,53 +1087,47 @@ elif methode == " Choix des données":
                             st.markdown("---")
                             st.markdown("#####  Utiliser ces données pour :")
                             
-                            col_btn1, col_btn2 = st.columns(2)
-                            
-                            with col_btn1:
-                                if st.button(f" AHP - {sheet_name}", key=f"ahp_{sheet_name}", use_container_width=True):
-                                    # Sauvegarder les critères pour AHP
-                                    st.session_state.noms_criteres_ahp = donnees_extraites['criteres']
-                                    st.session_state.criteres_importes = donnees_extraites['criteres']
-                                    st.success(f" {len(donnees_extraites['criteres'])} critères chargés pour AHP !")
-                                    st.session_state.page_actuelle = " AHP - Analytic Hierarchy Process"
-                                    st.rerun()
-                            
-                            with col_btn2:
-                                if st.button(f" ELECTRE II - {sheet_name}", key=f"electre_{sheet_name}", use_container_width=True):
-                                    # Sauvegarder toutes les données pour ELECTRE II
-                                    st.session_state.alternatives_importees = donnees_extraites['alternatives']
-                                    st.session_state.criteres_importes = donnees_extraites['criteres']
-                                    st.session_state.performances_importees = donnees_extraites['performances']
-                                    st.session_state.orientation_donnees = orientation
-                                    st.success(f"""
-                                     Données chargées pour ELECTRE II !
-                                    - {len(donnees_extraites['alternatives'])} alternatives
-                                    - {len(donnees_extraites['criteres'])} critères
-                                    """)
-                                    st.session_state.page_actuelle = " ELECTRE II"
-                                    st.rerun()
+                            # MODIFICATION PRINCIPALE: Un seul bouton pour charger dans les deux méthodes
+                            if st.button(f"✅ Charger pour AHP et ELECTRE II - {sheet_name}", key=f"both_{sheet_name}", use_container_width=True, type="primary"):
+                                # Sauvegarder TOUTES les données pour les deux méthodes
+                                st.session_state.alternatives_importees = donnees_extraites['alternatives']
+                                st.session_state.criteres_importes = donnees_extraites['criteres']
+                                st.session_state.performances_importees = donnees_extraites['performances']
+                                st.session_state.orientation_donnees = orientation
+                                st.session_state.noms_criteres_ahp = donnees_extraites['criteres']
+                                
+                                st.success(f"""
+                                ✅ **Données chargées pour AHP et ELECTRE II !**
+                                - {len(donnees_extraites['alternatives'])} alternatives
+                                - {len(donnees_extraites['criteres'])} critères
+                                - Prêt pour AHP et ELECTRE II
+                                """)
+                                st.balloons()
+                                time.sleep(1)
+                                st.session_state.page_actuelle = " AHP - Analytic Hierarchy Process"
+                                st.rerun()
                         
                         except Exception as e:
                             st.error(f"Erreur lors de l'extraction des données : {e}")
-                            st.info(" Vérifiez que votre fichier contient bien une première colonne/ligne avec les noms")
+                            st.info("🔍 Vérifiez que votre fichier contient bien une première colonne/ligne avec les noms")
                 
                 st.markdown("---")
-                if st.button(" Continuer vers AHP", type="primary", use_container_width=True):
-                    st.session_state.page_actuelle = " AHP - Analytic Hierarchy Process"
+                if st.button("➡️ Continuer vers AHP", type="primary", use_container_width=True):
+                    st.session_state.page_actuelle = "⚖️ AHP - Analytic Hierarchy Process"
                     st.rerun()
 
-# ============= PAGE AHP (identique, conservée pour la complétude) =============
-elif methode == " AHP - Analytic Hierarchy Process":
-    st.header(" Méthode AHP")
+# ============= PAGE AHP =============
+elif methode == "⚖️ AHP - Analytic Hierarchy Process":
+    st.header("⚖️ Méthode AHP")
     
     st.markdown("""
-    ### Étape 1️ : Configuration
+    ### Étape 1️⃣ : Configuration
     Définissez vos critères de décision.
     """)
     
     # Utiliser les critères importés si disponibles
     if st.session_state.criteres_importes:
-        st.success(f" {len(st.session_state.criteres_importes)} critères importés depuis le fichier !")
+        st.success(f"✅ {len(st.session_state.criteres_importes)} critères importés depuis le fichier !")
         utiliser_importes = st.checkbox("Utiliser les critères importés", value=True)
         
         if utiliser_importes:
@@ -1163,7 +1158,7 @@ elif methode == " AHP - Analytic Hierarchy Process":
     
     st.markdown("---")
     st.markdown("""
-    ### Étape 2️ : Comparaisons par paires
+    ### Étape 2️⃣ : Comparaisons par paires
     
     **Échelle de Saaty :**
     - **1** = Égale importance | **3** = Importance modérée | **5** = Forte importance
@@ -1215,9 +1210,9 @@ elif methode == " AHP - Analytic Hierarchy Process":
             
             st.markdown("---")
     
-    if st.button("Calculer les poids et la cohérence", type="primary", use_container_width=True):
+    if st.button(" Calculer les poids et la cohérence", type="primary", use_container_width=True):
         st.session_state.matrice_ahp = matrice
-        st.markdown("### Étape 3️ : Résultats")
+        st.markdown("### Étape 3️⃣ : Résultats")
         
         st.subheader(" Matrice de comparaisons complète")
         df_matrice = pd.DataFrame(matrice, columns=noms_criteres, index=noms_criteres)
@@ -1233,7 +1228,7 @@ elif methode == " AHP - Analytic Hierarchy Process":
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader(" Poids des critères")
+            st.subheader("⚖️ Poids des critères")
             df_poids = pd.DataFrame({
                 'Critère': noms_criteres,
                 'Poids': poids,
@@ -1257,11 +1252,11 @@ elif methode == " AHP - Analytic Hierarchy Process":
             st.metric("CR", f"{CR:.4f}")
             
             if CR < 0.10:
-                st.success(" Cohérence acceptable (CR < 0.10)")
+                st.success("✅ Cohérence acceptable (CR < 0.10)")
             elif CR < 0.15:
-                st.warning(" Cohérence marginale")
+                st.warning("⚠️ Cohérence marginale")
             else:
-                st.error(" Cohérence insuffisante")
+                st.error("❌ Cohérence insuffisante")
             
             fig = go.Figure(go.Indicator(
                 mode = "gauge+number",
@@ -1292,7 +1287,7 @@ elif methode == " AHP - Analytic Hierarchy Process":
         st.subheader(" Ajustement Interactif des Poids (Drag-and-Drop)")
         
         st.markdown("""
-        ** Mode interactif activé !**
+        **✨ Mode interactif activé !**
         
         Trois façons d'ajuster les poids :
         1.  **Cliquez et glissez** les barres du graphique verticalement
@@ -1383,24 +1378,24 @@ elif methode == " AHP - Analytic Hierarchy Process":
         col_btn1, col_btn2, col_btn3 = st.columns(3)
         
         with col_btn1:
-            if st.button(" Utiliser les poids ajustés", type="primary", use_container_width=True):
+            if st.button("✅ Utiliser les poids ajustés", type="primary", use_container_width=True):
                 st.session_state.poids_ahp = st.session_state.poids_ajustes
-                st.success(" Poids ajustés sauvegardés !")
+                st.success("✅ Poids ajustés sauvegardés !")
                 st.balloons()
         
         with col_btn2:
-            if st.button(" Réinitialiser", use_container_width=True):
+            if st.button("🔄 Réinitialiser", use_container_width=True):
                 st.session_state.poids_ajustes = poids.copy()
                 st.session_state.poids_ahp = poids
-                st.info(" Réinitialisé aux valeurs AHP")
+                st.info("🔄 Réinitialisé aux valeurs AHP")
                 st.rerun()
         
         with col_btn3:
-            if st.button(" ELECTRE II", type="secondary", use_container_width=True):
+            if st.button("➡️ ELECTRE II", type="secondary", use_container_width=True):
                 st.session_state.page_actuelle = " ELECTRE II"
                 st.rerun()
 
-# ============= PAGE ELECTRE II (AMÉLIORÉE AVEC NOUVELLES FORMULES ET GRAPHE AVEC FLÈCHES) =============
+# ============= PAGE ELECTRE II (AMÉLIORÉE) =============
 elif methode == " ELECTRE II":
     st.header(" Méthode ELECTRE II - Surclassement Fort et Faible")
     
@@ -1424,7 +1419,7 @@ elif methode == " ELECTRE II":
     
     if donnees_importees_disponibles:
         st.success(f"""
-         **Données importées détectées !**
+        ✅ **Données importées détectées !**
         - {len(st.session_state.alternatives_importees)} alternatives
         - {len(st.session_state.criteres_importes)} critères
         """)
@@ -1434,14 +1429,14 @@ elif methode == " ELECTRE II":
     
     # Vérifier si poids AHP disponibles
     if st.session_state.poids_ahp is not None:
-        st.success(f" Poids AHP détectés pour {len(st.session_state.noms_criteres_ahp)} critères !")
+        st.success(f"✅ Poids AHP détectés pour {len(st.session_state.noms_criteres_ahp)} critères !")
         utiliser_ahp = st.checkbox("Utiliser les poids calculés avec AHP", value=True)
     else:
         st.info(" Utilisez d'abord AHP pour calculer les poids des critères.")
         utiliser_ahp = False
     
     st.markdown("---")
-    st.markdown("### Étape 1️ : Configuration")
+    st.markdown("### Étape 1️⃣ : Configuration")
     
     # Configuration selon les données disponibles
     if utiliser_donnees_importees:
@@ -1460,7 +1455,7 @@ elif methode == " ELECTRE II":
         """)
         
         # Afficher la matrice des performances
-        st.markdown("####  Matrice des performances importées")
+        st.markdown("#### 📈 Matrice des performances importées")
         df_perf_import = pd.DataFrame(
             performances,
             columns=noms_criteres,
@@ -1469,11 +1464,11 @@ elif methode == " ELECTRE II":
         st.dataframe(df_perf_import.style.background_gradient(cmap="YlGn"), use_container_width=True)
         
     else:
-        # Saisie manuelle
+        # Saisie manuelle - SUPPRESSION DE LA LIMITE max_value
         col1, col2 = st.columns(2)
         
         with col1:
-            n_alternatives = st.number_input("Nombre d'alternatives", min_value=2, max_value=10, value=4)
+            n_alternatives = st.number_input("Nombre d'alternatives", min_value=2, value=4)  # Pas de max_value
         
         with col2:
             if utiliser_ahp:
@@ -1510,7 +1505,7 @@ elif methode == " ELECTRE II":
     st.markdown("---")
     
     # Sens d'optimisation
-    st.markdown("### Étape 2️ : Sens d'optimisation des critères")
+    st.markdown("### Étape 2️⃣ : Sens d'optimisation des critères")
     st.info("📌 Indiquez si chaque critère doit être **maximisé** (plus c'est mieux) ou **minimisé** (moins c'est mieux)")
     
     cols_sens = st.columns(min(n_criteres, 4))
@@ -1530,7 +1525,7 @@ elif methode == " ELECTRE II":
     st.markdown("---")
     
     # Poids des critères
-    st.markdown("### Étape 3️ : Poids des critères")
+    st.markdown("### Étape 3️⃣ : Poids des critères")
     
     if utiliser_ahp:
         poids = st.session_state.poids_ahp.tolist()
@@ -1542,7 +1537,7 @@ elif methode == " ELECTRE II":
         })
         st.dataframe(df_poids_display.style.format({'Poids': '{:.4f}', 'Pourcentage': '{:.2f}%'}), use_container_width=True)
         
-        st.success(" Poids importés depuis AHP !")
+        st.success("✅ Poids importés depuis AHP !")
         
     else:
         st.info(" Entrez manuellement les poids ou utilisez AHP.")
@@ -1570,7 +1565,7 @@ elif methode == " ELECTRE II":
     
     # Performances (seulement si pas importées)
     if not utiliser_donnees_importees:
-        st.markdown("### Étape 4️ : Performances des alternatives")
+        st.markdown("### Étape 4️⃣ : Performances des alternatives")
         st.subheader("Tableau des performances (valeurs brutes)")
         
         performances = []
@@ -1595,7 +1590,7 @@ elif methode == " ELECTRE II":
         st.markdown("---")
     
     # Seuils ELECTRE II (2 couples)
-    st.markdown("### Étape 5️ : Seuils de surclassement ELECTRE II")
+    st.markdown("### Étape 5️⃣ : Seuils de surclassement ELECTRE II")
     
     st.info("""
     **📌 Deux couples de seuils :**
@@ -1677,16 +1672,16 @@ elif methode == " ELECTRE II":
         else:
             # Étape 1 : Normalisation AVEC NOUVELLES FORMULES
             st.markdown("---")
-            st.markdown("##  RÉSULTATS ELECTRE II")
+            st.markdown("## 📊 RÉSULTATS ELECTRE II")
             
-            st.subheader("1️ Normalisation des performances")
+            st.subheader("1️⃣ Normalisation des performances")
             
             st.info("""
             **Formules de normalisation appliquées :**
             - **Pour critères à maximiser** : g*ⱼ(a) = [gⱼ(a) - min] / [max - min]
             - **Pour critères à minimiser** : g*ⱼ(a) = [max - gⱼ(a)] / [max - min]
             
-             Plus g*ⱼ(a) est élevé, meilleure est l'alternative (indépendamment du sens d'optimisation)
+            ✅ Plus g*ⱼ(a) est élevé, meilleure est l'alternative (indépendamment du sens d'optimisation)
             """)
             
             performances_norm = normaliser_performances(performances, sens_optimisation)
@@ -1702,12 +1697,12 @@ elif methode == " ELECTRE II":
                 st.markdown("**Performances normalisées (0-1)**")
                 df_perf_norm = pd.DataFrame(performances_norm, columns=noms_criteres, index=noms_alternatives)
                 st.dataframe(df_perf_norm.style.format("{:.4f}").background_gradient(cmap="RdYlGn", axis=0), use_container_width=True)
-                st.caption(" Valeurs normalisées : 1 = meilleur, 0 = moins bon (pour tous les critères)")
+                st.caption("✅ Valeurs normalisées : 1 = meilleur, 0 = moins bon (pour tous les critères)")
             
             st.markdown("---")
             
             # Étape 2 : Concordance
-            st.subheader("2️ Matrice de concordance")
+            st.subheader("2️⃣ Matrice de concordance")
             st.info("Pour chaque paire (a,b), C(a,b) = somme des poids des critères où a ≥ b")
             
             concordance = calculer_concordance_electre2(performances_norm, poids)
@@ -1720,7 +1715,7 @@ elif methode == " ELECTRE II":
             st.markdown("---")
             
             # Étape 3 : Discordance
-            st.subheader("3️ Matrice de discordance")
+            st.subheader("3️⃣ Matrice de discordance")
             st.info("Pour chaque paire (a,b), D(a,b) = max des différences normalisées où b > a")
             
             discordance = calculer_discordance_electre2(performances_norm)
@@ -1733,7 +1728,7 @@ elif methode == " ELECTRE II":
             st.markdown("---")
             
             # Étape 4 : Construction des surclassements
-            st.subheader("4️ Graphes de surclassement FORT et FAIBLE")
+            st.subheader("4️⃣ Graphes de surclassement FORT et FAIBLE")
             
             S_fort, S_faible = construire_surclassements_electre2(concordance, discordance, c1, d1, c2, d2)
             
@@ -1767,11 +1762,11 @@ elif methode == " ELECTRE II":
             st.markdown("---")
             
             # Étape 5 : Préordre partiel
-            st.subheader("5️ Préordre partiel et relations")
+            st.subheader("5️⃣ Préordre partiel et relations")
             
             df_relations, matrice_relations, df_scores = deduire_preordre_electre2(S_fort, S_faible, noms_alternatives)
             
-            tab1, tab2, tab3 = st.tabs([" Relations", " Classement", " Noyau"])
+            tab1, tab2, tab3 = st.tabs(["🔗 Relations", "🏆 Classement", "⭐ Noyau"])
             
             with tab1:
                 st.markdown("**Relations entre alternatives :**")
@@ -1801,7 +1796,7 @@ elif methode == " ELECTRE II":
                 
                 meilleure = df_scores.iloc[0]
                 st.success(f"""
-                ###  **Meilleure alternative : {meilleure['Alternative']}**
+                ### 🏆 **Meilleure alternative : {meilleure['Alternative']}**
                 - Score net : {int(meilleure['Score'])}
                 - Domine : {int(meilleure['Domine'])} alternatives
                 - Dominé par : {int(meilleure['Dominé_par'])} alternatives
@@ -1818,7 +1813,7 @@ elif methode == " ELECTRE II":
                     
                     df_noyau = pd.DataFrame({
                         'Alternative': noms_alternatives,
-                        'Dans_le_noyau': [' Oui' if est_dans_noyau[i] == 1 else '❌ Non' for i in range(len(noms_alternatives))]
+                        'Dans_le_noyau': ['✅ Oui' if est_dans_noyau[i] == 1 else '❌ Non' for i in range(len(noms_alternatives))]
                     })
                     st.dataframe(df_noyau, use_container_width=True)
                 else:
@@ -1827,7 +1822,7 @@ elif methode == " ELECTRE II":
             st.markdown("---")
             
             # Étape 6 : Graphe de surclassement AVEC FLÈCHES
-            st.subheader("6️ Graphe de surclassement avec flèches directionnelles")
+            st.subheader("6️⃣ Graphe de surclassement avec flèches directionnelles")
             fig_graphe = creer_graphe_surclassement(S_fort, S_faible, noms_alternatives, df_scores)
             st.plotly_chart(fig_graphe, use_container_width=True)
             
@@ -1845,7 +1840,7 @@ elif methode == " ELECTRE II":
             st.markdown("---")
             
             # Résumé final
-            st.markdown("###  Résumé ELECTRE II")
+            st.markdown("### 📋 Résumé ELECTRE II")
             
             col_res1, col_res2, col_res3 = st.columns(3)
             
@@ -1868,6 +1863,6 @@ elif methode == " ELECTRE II":
                     st.info(f"**Noyau** : {', '.join(noyau[:3])}" + ("..." if len(noyau) > 3 else ""))
 
 st.markdown("---")
-st.markdown(" **Astuce** : Importez vos données → AHP → Ajustez avec drag-and-drop → ELECTRE II avec flèches")
-st.markdown("Développé avec SERHANE Firdaws - BOURCHAK Mehdi - TOURATI Ahmed | Encadrer par Pr. BOUANANI Hicham | 2025-2026")
+st.markdown("💡 **Astuce** : Importez vos données → AHP → Ajustez avec drag-and-drop → ELECTRE II avec flèches")
+st.markdown("Développé avec SERHANE Firdaws - BOURCHAK Mehdi - TOURATI Ahmed | Encadré par Pr. BOUANANI Hicham | 2025-2026")
 st.markdown("firdaws.serh@gmail.com | mhdbourchak@gmail.com | ahmedtourati7@gmail.com")
