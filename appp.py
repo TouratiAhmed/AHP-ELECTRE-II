@@ -418,13 +418,14 @@ def calculer_concordance_electre2(performances, poids):
     
     for i in range(n):
         for j in range(n):
-            if i != j:
+            if i == j:
+                c_ij = 1  # Diagonale = 1
+            else:
                 c_ij = 0
                 for k in range(m):
-                    # On ajoute le poids si l'alternative i est au moins aussi bonne que j sur le critère k
                     if performances[i][k] >= performances[j][k]:
                         c_ij += poids[k]
-                concordance[i][j] = c_ij
+            concordance[i][j] = c_ij
     
     return concordance
 
@@ -1874,3 +1875,4 @@ st.markdown("---")
 st.markdown("💡 **Astuce** : Importez vos données → AHP → Ajustez avec drag-and-drop → ELECTRE II avec flèches")
 st.markdown("Développé avec SERHANE Firdaws - BOURCHAK Mehdi - TOURATI Ahmed | Encadré par Pr. BOUANANI Hicham | 2025-2026")
 st.markdown("firdaws.serh@gmail.com | mhdbourchak@gmail.com | ahmedtourati7@gmail.com")
+
