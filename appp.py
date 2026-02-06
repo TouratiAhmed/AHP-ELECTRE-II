@@ -926,10 +926,10 @@ if methode == " Accueil":
     ---
     
     **Instructions :** 
-    1. Allez dans ** Choix des données** pour charger ou saisir vos données
-    2. Utilisez ** AHP** pour déterminer les poids de vos critères
+    1. Allez dans **Choix des données** pour charger ou saisir vos données
+    2. Utilisez **AHP** pour déterminer les poids de vos critères
     3. **Glissez les barres du graphique** pour ajuster interactivement
-    4. Utilisez ** ELECTRE II** pour classer vos alternatives avec surclassement fort/faible
+    4. Utilisez **ELECTRE II** pour classer vos alternatives avec surclassement fort/faible
     """)
     
     col1, col2 = st.columns(2)
@@ -2181,3 +2181,4 @@ st.markdown("---")
 st.markdown("💡 **Astuce** : Importez vos données → AHP  → ELECTRE II ")
 st.markdown("Développé avec SERHANE Firdaws - BOURCHAK Mehdi - TOURATI Ahmed | Encadré par Pr. BOUANANI Hicham | 2025-2026")
 st.markdown("firdaws.serh@gmail.com | mhdbourchak@gmail.com | ahmedtourati7@gmail.com")
+
