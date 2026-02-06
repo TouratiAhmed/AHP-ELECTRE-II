@@ -42,7 +42,7 @@ st.title("Analyse de Décision Multicritere-MCDA")
 st.markdown("### AHP et ELECTRE II")
 
 # Sidebar pour navigation
-options_menu = ["🏠 Accueil", "📊 Choix des données", "⚖️ AHP - Analytic Hierarchy Process", "🎯 ELECTRE II"]
+options_menu = [" Accueil", " Choix des données", " AHP - Analytic Hierarchy Process", " ELECTRE II"]
 
 # Déterminer l'index actuel de manière sécurisée
 try:
@@ -173,9 +173,9 @@ def create_draggable_bar_chart(noms_criteres, poids_pourcentage):
         <div class="controls" id="controls"></div>
         
         <div style="margin-top: 20px;">
-            <button onclick="resetWeights()">🔄 Réinitialiser</button>
-            <button onclick="equalWeights()">⚖️ Poids égaux</button>
-            <button onclick="exportWeights()">💾 Exporter les poids</button>
+            <button onclick="resetWeights()"> Réinitialiser</button>
+            <button onclick="equalWeights()"> Poids égaux</button>
+            <button onclick="exportWeights()"> Exporter les poids</button>
         </div>
         
         <script>
@@ -885,20 +885,20 @@ def extraire_alternatives_et_criteres(df, orientation='colonnes'):
     }
 
 # ============= PAGE D'ACCUEIL =============
-if methode == "🏠 Accueil":
+if methode == " Accueil":
     st.markdown("""
     ## Application d'aide à la décision multicritère
     
     Cette application implémente deux méthodes puissantes :
     
-    ### ⚖️ AHP (Analytic Hierarchy Process)
+    ###  AHP (Analytic Hierarchy Process)
     - Méthode de pondération des critères par comparaisons par paires
     - Calcul automatique des poids
     - Graphique interactif avec drag-and-drop
     - Vérification de la cohérence des jugements
     - Visualisations interactives
     
-    ### 🎯 ELECTRE II (ÉLimination Et Choix Traduisant la RÉalité)
+    ###  ELECTRE II (ÉLimination Et Choix Traduisant la RÉalité)
     - Méthode de classement des alternatives par surclassement fort/faible
     - **Étape 1 : Normalisation** selon les formules mathématiques standards
       - Pour critères à **maximiser**: g*ⱼ(a) = [gⱼ(a) - min] / [max - min]
@@ -915,7 +915,7 @@ if methode == "🏠 Accueil":
     - **Étape 6 : Construction du noyau** (alternatives non dominées)
     - **Étape 7 : Graphe de surclassement** avec **flèches directionnelles**
     
-    ### 🚀 Fonctionnalités
+    ###  Fonctionnalités
     - **Import de données** depuis fichiers (Excel, CSV,...)
     - **Détection** des critères et alternatives
     - **Saisie manuelle** flexible
@@ -926,10 +926,10 @@ if methode == "🏠 Accueil":
     ---
     
     **Instructions :** 
-    1. Allez dans **📊 Choix des données** pour charger ou saisir vos données
-    2. Utilisez **⚖️ AHP** pour déterminer les poids de vos critères
+    1. Allez dans ** Choix des données** pour charger ou saisir vos données
+    2. Utilisez ** AHP** pour déterminer les poids de vos critères
     3. **Glissez les barres du graphique** pour ajuster interactivement
-    4. Utilisez **🎯 ELECTRE II** pour classer vos alternatives avec surclassement fort/faible
+    4. Utilisez ** ELECTRE II** pour classer vos alternatives avec surclassement fort/faible
     """)
     
     col1, col2 = st.columns(2)
@@ -937,9 +937,9 @@ if methode == "🏠 Accueil":
     with col1:
         st.info("""
         **Workflow recommandé :**
-        1. 📊 Choix des données
-        2. ⚖️ AHP (avec drag-and-drop)
-        3. 🎯 ELECTRE II (surclassement fort/faible)
+        1.  Choix des données
+        2.  AHP (avec drag-and-drop)
+        3.  ELECTRE II (surclassement fort/faible)
         4. Analysez les résultats !
         """)
     
@@ -959,13 +959,13 @@ if methode == "🏠 Accueil":
             déterminer les poids de vos critères.
             """)
     
-    if st.button("🚀 Commencer : Choix des données", type="primary", use_container_width=True):
-        st.session_state.page_actuelle = "📊 Choix des données"
+    if st.button(" Commencer : Choix des données", type="primary", use_container_width=True):
+        st.session_state.page_actuelle = " Choix des données"
         st.rerun()
 
 # ============= PAGE CHOIX DES DONNÉES (AMÉLIORÉE) =============
-elif methode == "📊 Choix des données":
-    st.header("📊 Choix du mode de saisie des données")
+elif methode == " Choix des données":
+    st.header(" Choix du mode de saisie des données")
     
     st.markdown("""
     ### Comment souhaitez-vous fournir vos données ?
@@ -995,7 +995,7 @@ elif methode == "📊 Choix des données":
         """)
         if st.button("✍️ Saisie manuelle", use_container_width=True, type="secondary"):
             st.session_state.mode_saisie = "manuel"
-            st.session_state.page_actuelle = "⚖️ AHP - Analytic Hierarchy Process"
+            st.session_state.page_actuelle = " AHP - Analytic Hierarchy Process"
             st.rerun()
     
     with col3:
@@ -1044,15 +1044,15 @@ elif methode == "📊 Choix des données":
             if donnees:
                 st.session_state.donnees_chargees = donnees
                 
-                st.subheader("📊 Aperçu et Configuration des données chargées")
+                st.subheader(" Aperçu et Configuration des données chargées")
                 
                 for sheet_name, df in donnees.items():
-                    with st.expander(f"📄 Feuille : {sheet_name}", expanded=True):
+                    with st.expander(f" Feuille : {sheet_name}", expanded=True):
                         st.markdown("##### Aperçu des données")
                         st.dataframe(df.head(10), use_container_width=True)
                         
                         st.markdown("---")
-                        st.markdown("##### 🔄 Configuration de l'orientation des données")
+                        st.markdown("#####  Configuration de l'orientation des données")
                         
                         st.info("""
                         **Comment sont organisées vos données ?**
@@ -1076,16 +1076,16 @@ elif methode == "📊 Choix des données":
                             col_preview1, col_preview2 = st.columns(2)
                             
                             with col_preview1:
-                                st.markdown("**📊 Alternatives détectées:**")
+                                st.markdown("** Alternatives détectées:**")
                                 st.write(donnees_extraites['alternatives'])
                                 st.metric("Nombre", len(donnees_extraites['alternatives']))
                             
                             with col_preview2:
-                                st.markdown("**📋 Critères détectés:**")
+                                st.markdown("** Critères détectés:**")
                                 st.write(donnees_extraites['criteres'])
                                 st.metric("Nombre", len(donnees_extraites['criteres']))
                             
-                            st.markdown("**📈 Matrice des performances:**")
+                            st.markdown("** Matrice des performances:**")
                             df_perf_preview = pd.DataFrame(
                                 donnees_extraites['performances'],
                                 columns=donnees_extraites['criteres'],
@@ -1094,10 +1094,10 @@ elif methode == "📊 Choix des données":
                             st.dataframe(df_perf_preview.style.background_gradient(cmap="YlGn"), use_container_width=True)
                             
                             st.markdown("---")
-                            st.markdown("##### 🎯 Utiliser ces données pour :")
+                            st.markdown("#####  Utiliser ces données pour :")
                             
                             # MODIFICATION PRINCIPALE: Un seul bouton pour charger dans les deux méthodes
-                            if st.button(f"✅ Charger pour AHP et ELECTRE II - {sheet_name}", key=f"both_{sheet_name}", use_container_width=True, type="primary"):
+                            if st.button(f" Charger pour AHP et ELECTRE II - {sheet_name}", key=f"both_{sheet_name}", use_container_width=True, type="primary"):
                                 # Sauvegarder TOUTES les données pour les deux méthodes
                                 st.session_state.alternatives_importees = donnees_extraites['alternatives']
                                 st.session_state.criteres_importes = donnees_extraites['criteres']
@@ -1106,7 +1106,7 @@ elif methode == "📊 Choix des données":
                                 st.session_state.noms_criteres_ahp = donnees_extraites['criteres']
                                 
                                 st.success(f"""
-                                ✅ **Données chargées pour AHP et ELECTRE II !**
+                                 **Données chargées pour AHP et ELECTRE II !**
                                 - {len(donnees_extraites['alternatives'])} alternatives
                                 - {len(donnees_extraites['criteres'])} critères
                                 - Prêt pour AHP et ELECTRE II
@@ -1122,12 +1122,12 @@ elif methode == "📊 Choix des données":
                 
                 st.markdown("---")
                 if st.button("➡️ Continuer vers AHP", type="primary", use_container_width=True):
-                    st.session_state.page_actuelle = "⚖️ AHP - Analytic Hierarchy Process"
+                    st.session_state.page_actuelle = " AHP - Analytic Hierarchy Process"
                     st.rerun()
 
 # ============= PAGE AHP =============
-elif methode == "⚖️ AHP - Analytic Hierarchy Process":
-    st.header("⚖️ Méthode AHP")
+elif methode == " AHP - Analytic Hierarchy Process":
+    st.header(" Méthode AHP")
     
     st.markdown("""
     ### Étape 1️⃣ : Configuration
@@ -1219,11 +1219,11 @@ elif methode == "⚖️ AHP - Analytic Hierarchy Process":
             
             st.markdown("---")
     
-    if st.button("🧮 Calculer les poids et la cohérence", type="primary", use_container_width=True):
+    if st.button(" Calculer les poids et la cohérence", type="primary", use_container_width=True):
         st.session_state.matrice_ahp = matrice
         st.markdown("### Étape 3️⃣ : Résultats")
         
-        st.subheader("📊 Matrice de comparaisons complète")
+        st.subheader(" Matrice de comparaisons complète")
         df_matrice = pd.DataFrame(matrice, columns=noms_criteres, index=noms_criteres)
         st.dataframe(df_matrice.style.format("{:.3f}").background_gradient(cmap="YlOrRd"), use_container_width=True)
         
@@ -1237,7 +1237,7 @@ elif methode == "⚖️ AHP - Analytic Hierarchy Process":
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("⚖️ Poids des critères")
+            st.subheader(" Poids des critères")
             df_poids = pd.DataFrame({
                 'Critère': noms_criteres,
                 'Poids': poids,
@@ -1254,7 +1254,7 @@ elif methode == "⚖️ AHP - Analytic Hierarchy Process":
             st.plotly_chart(fig, use_container_width=True)
         
         with col2:
-            st.subheader("🎯 Analyse de cohérence")
+            st.subheader(" Analyse de cohérence")
             
             st.metric("λ max", f"{lambda_max:.4f}")
             st.metric("CI", f"{CI:.4f}")
@@ -1293,15 +1293,15 @@ elif methode == "⚖️ AHP - Analytic Hierarchy Process":
         st.markdown("---")
         
         # ========== GRAPHIQUE DRAG-AND-DROP INTERACTIF ==========
-        st.subheader("🎨 Ajustement Interactif des Poids (Drag-and-Drop)")
+        st.subheader(" Ajustement Interactif des Poids (Drag-and-Drop)")
         
         st.markdown("""
         **✨ Mode interactif activé !**
         
         Trois façons d'ajuster les poids :
-        1. 🖱️ **Cliquez et glissez** les barres du graphique verticalement
-        2. ⌨️ **Entrez des valeurs** dans les champs sous le graphique
-        3. 🎚️ **Utilisez les curseurs** dans l'onglet ci-dessous
+        1.  **Cliquez et glissez** les barres du graphique verticalement
+        2.  **Entrez des valeurs** dans les champs sous le graphique
+        3.  **Utilisez les curseurs** dans l'onglet ci-dessous
         
         Les poids sont **automatiquement normalisés** pour totaliser 100%.
         """)
@@ -1313,7 +1313,7 @@ elif methode == "⚖️ AHP - Analytic Hierarchy Process":
         st.markdown("---")
         
         # Alternative avec curseurs
-        with st.expander("🎚️ Ajustement alternatif avec curseurs"):
+        with st.expander(" Ajustement alternatif avec curseurs"):
             cols_sliders = st.columns(min(n_criteres, 3))
             poids_temp = []
             
@@ -1347,7 +1347,7 @@ elif methode == "⚖️ AHP - Analytic Hierarchy Process":
             st.dataframe(df_ajuste.style.format({'Poids': '{:.4f}', 'Pourcentage': '{:.2f}%'}), use_container_width=True)
         
         # Comparaison
-        st.markdown("### 📊 Comparaison : Poids calculés vs Poids ajustés")
+        st.markdown("###  Comparaison : Poids calculés vs Poids ajustés")
         
         col_comp1, col_comp2 = st.columns(2)
         
@@ -1401,15 +1401,15 @@ elif methode == "⚖️ AHP - Analytic Hierarchy Process":
         
         with col_btn3:
             if st.button("➡️ ELECTRE II", type="secondary", use_container_width=True):
-                st.session_state.page_actuelle = "🎯 ELECTRE II"
+                st.session_state.page_actuelle = " ELECTRE II"
                 st.rerun()
 
 # ============= PAGE ELECTRE II (AMÉLIORÉE) =============
-elif methode == "🎯 ELECTRE II":
-    st.header("🎯 Méthode ELECTRE II - Surclassement Fort et Faible")
+elif methode == " ELECTRE II":
+    st.header(" Méthode ELECTRE II - Surclassement Fort et Faible")
     
     st.info("""
-    **📚 ELECTRE II - Procédure avec normalisation mathématique :**
+    ** ELECTRE II - Procédure avec normalisation mathématique :**
     1. **Normalisation** selon les formules standards :
        - **Maximiser** : g*ⱼ(a) = [gⱼ(a) - minᵦ gⱼ(b)] / [maxᵦ gⱼ(b) - minᵦ gⱼ(b)]
        - **Minimiser** : g*ⱼ(a) = [maxᵦ gⱼ(b) - gⱼ(a)] / [maxᵦ gⱼ(b) - minᵦ gⱼ(b)]
@@ -1464,7 +1464,7 @@ elif methode == "🎯 ELECTRE II":
         """)
         
         # Afficher la matrice des performances
-        st.markdown("#### 📈 Matrice des performances importées")
+        st.markdown("####  Matrice des performances importées")
         df_perf_import = pd.DataFrame(
             performances,
             columns=noms_criteres,
@@ -1674,14 +1674,14 @@ elif methode == "🎯 ELECTRE II":
     st.markdown("---")
     
     # CALCUL ELECTRE II
-    if st.button("🚀 Calculer le classement ELECTRE II", type="primary", use_container_width=True):
+    if st.button(" Calculer le classement ELECTRE II", type="primary", use_container_width=True):
         
         if c1 <= c2 or d1 >= d2:
             st.error("❌ Veuillez corriger les seuils : c₁ > c₂ et d₁ < d₂")
         else:
             # Étape 1 : Normalisation AVEC NOUVELLES FORMULES
             st.markdown("---")
-            st.markdown("## 📊 RÉSULTATS ELECTRE II")
+            st.markdown("##  RÉSULTATS ELECTRE II")
             
             st.subheader("1️⃣ Normalisation des performances")
             
@@ -1689,8 +1689,6 @@ elif methode == "🎯 ELECTRE II":
             **Formules de normalisation appliquées :**
             - **Pour critères à maximiser** : g*ⱼ(a) = [gⱼ(a) - min] / [max - min]
             - **Pour critères à minimiser** : g*ⱼ(a) = [max - gⱼ(a)] / [max - min]
-            
-            ✅ Plus g*ⱼ(a) est élevé, meilleure est l'alternative (indépendamment du sens d'optimisation)
             """)
             
             performances_norm = normaliser_performances(performances, sens_optimisation)
@@ -1706,7 +1704,7 @@ elif methode == "🎯 ELECTRE II":
                 st.markdown("**Performances normalisées (0-1)**")
                 df_perf_norm = pd.DataFrame(performances_norm, columns=noms_criteres, index=noms_alternatives)
                 st.dataframe(df_perf_norm.style.format("{:.4f}").background_gradient(cmap="RdYlGn", axis=0), use_container_width=True)
-                st.caption("✅ Valeurs normalisées : 1 = meilleur, 0 = moins bon (pour tous les critères)")
+                st.caption(" Valeurs normalisées : 1 = meilleur, 0 = moins bon (pour tous les critères)")
             
             st.markdown("---")
             
@@ -1775,7 +1773,7 @@ elif methode == "🎯 ELECTRE II":
             
             df_relations, matrice_relations, df_scores = deduire_preordre_electre2(S_fort, S_faible, noms_alternatives)
             
-            tab1, tab2, tab3 = st.tabs(["🔗 Relations", "🏆 Classement", "⭐ Noyau"])
+            tab1, tab2, tab3 = st.tabs([" Relations", " Classement", " Noyau"])
             
             with tab1:
                 st.markdown("**Relations entre alternatives :**")
@@ -1805,7 +1803,7 @@ elif methode == "🎯 ELECTRE II":
                 
                 meilleure = df_scores.iloc[0]
                 st.success(f"""
-                ### 🏆 **Meilleure alternative : {meilleure['Alternative']}**
+                ###  **Meilleure alternative : {meilleure['Alternative']}**
                 - Score net : {int(meilleure['Score'])}
                 - Domine : {int(meilleure['Domine'])} alternatives
                 - Dominé par : {int(meilleure['Dominé_par'])} alternatives
@@ -1822,7 +1820,7 @@ elif methode == "🎯 ELECTRE II":
                     
                     df_noyau = pd.DataFrame({
                         'Alternative': noms_alternatives,
-                        'Dans_le_noyau': ['✅ Oui' if est_dans_noyau[i] == 1 else '❌ Non' for i in range(len(noms_alternatives))]
+                        'Dans_le_noyau': [' Oui' if est_dans_noyau[i] == 1 else ' Non' for i in range(len(noms_alternatives))]
                     })
                     st.dataframe(df_noyau, use_container_width=True)
                 else:
@@ -1849,7 +1847,7 @@ elif methode == "🎯 ELECTRE II":
             st.markdown("---")
             
             # Résumé final
-            st.markdown("### 📋 Résumé ELECTRE II")
+            st.markdown("###  Résumé ELECTRE II")
             
             col_res1, col_res2, col_res3 = st.columns(3)
             
@@ -1870,9 +1868,316 @@ elif methode == "🎯 ELECTRE II":
                 st.metric("Taille du noyau", len(noyau))
                 if len(noyau) > 0:
                     st.info(f"**Noyau** : {', '.join(noyau[:3])}" + ("..." if len(noyau) > 3 else ""))
+            
+            st.markdown("---")
+            
+            # ============= EXPORT DES RÉSULTATS =============
+            st.markdown("###  Export des résultats")
+            
+            st.info(" Téléchargez les résultats de votre analyse ELECTRE II dans différents formats")
+            
+            tab_export1, tab_export2, tab_export3 = st.tabs([" Excel", " Rapport TXT", " JSON"])
+            
+            with tab_export1:
+                st.markdown("#### Export Excel complet")
+                st.markdown("Génère un fichier Excel avec toutes les matrices et résultats sur différentes feuilles")
+                
+                # Créer le fichier Excel
+                output = BytesIO()
+                with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                    # Feuille 1: Données brutes
+                    df_perf_brut.to_excel(writer, sheet_name='Performances_Brutes', index=True)
+                    
+                    # Feuille 2: Performances normalisées
+                    df_perf_norm.to_excel(writer, sheet_name='Performances_Normalisées', index=True)
+                    
+                    # Feuille 3: Poids des critères
+                    df_poids_export = pd.DataFrame({
+                        'Critère': noms_criteres,
+                        'Poids': poids,
+                        'Pourcentage (%)': [p*100 for p in poids],
+                        'Sens': sens_optimisation
+                    })
+                    df_poids_export.to_excel(writer, sheet_name='Poids_Critères', index=False)
+                    
+                    # Feuille 4: Matrice de concordance
+                    df_conc.to_excel(writer, sheet_name='Concordance', index=True)
+                    
+                    # Feuille 5: Matrice de discordance
+                    df_disc.to_excel(writer, sheet_name='Discordance', index=True)
+                    
+                    # Feuille 6: Surclassement fort
+                    df_s_fort.to_excel(writer, sheet_name='Surclassement_Fort', index=True)
+                    
+                    # Feuille 7: Surclassement faible
+                    df_s_faible.to_excel(writer, sheet_name='Surclassement_Faible', index=True)
+                    
+                    # Feuille 8: Relations
+                    if len(df_relations) > 0:
+                        df_relations.to_excel(writer, sheet_name='Relations', index=False)
+                    
+                    # Feuille 9: Classement final
+                    df_scores.to_excel(writer, sheet_name='Classement', index=False)
+                    
+                    # Feuille 10: Noyau
+                    df_noyau.to_excel(writer, sheet_name='Noyau', index=False)
+                    
+                    # Feuille 11: Paramètres
+                    df_params = pd.DataFrame({
+                        'Paramètre': ['Seuil concordance fort (c1)', 'Seuil discordance fort (d1)', 
+                                     'Seuil concordance faible (c2)', 'Seuil discordance faible (d2)',
+                                     'Nombre alternatives', 'Nombre critères'],
+                        'Valeur': [c1, d1, c2, d2, n_alternatives, n_criteres]
+                    })
+                    df_params.to_excel(writer, sheet_name='Paramètres', index=False)
+                
+                output.seek(0)
+                
+                st.download_button(
+                    label=" Télécharger Excel (.xlsx)",
+                    data=output,
+                    file_name="resultats_electre2.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    use_container_width=True,
+                    type="primary"
+                )
+                
+                st.success("""
+                 **Contenu du fichier Excel :**
+                - Performances brutes et normalisées
+                - Poids des critères
+                - Matrices de concordance et discordance
+                - Surclassements fort et faible
+                - Relations et classement
+                - Noyau et paramètres
+                """)
+            
+            with tab_export2:
+                st.markdown("#### Export Rapport (TXT)")
+                st.markdown("Génère un rapport texte complet avec tableaux et résumé")
+                
+                # Créer un rapport texte pour PDF
+                rapport_text = f"""
+═══════════════════════════════════════════════════════════
+    RAPPORT D'ANALYSE MULTICRITÈRE - ELECTRE II
+═══════════════════════════════════════════════════════════
+
+Date de génération: {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+─────────────────────────────────────────────────────────────
+1. PARAMÈTRES DE L'ANALYSE
+─────────────────────────────────────────────────────────────
+
+Nombre d'alternatives: {n_alternatives}
+Nombre de critères: {n_criteres}
+
+Seuils ELECTRE II:
+  • Surclassement FORT:  c₁ = {c1:.2f}, d₁ = {d1:.2f}
+  • Surclassement FAIBLE: c₂ = {c2:.2f}, d₂ = {d2:.2f}
+
+─────────────────────────────────────────────────────────────
+2. CRITÈRES ET POIDS
+─────────────────────────────────────────────────────────────
+
+{df_poids_export.to_string(index=False)}
+
+─────────────────────────────────────────────────────────────
+3. PERFORMANCES DES ALTERNATIVES
+─────────────────────────────────────────────────────────────
+
+3.1 Performances brutes:
+{df_perf_brut.to_string()}
+
+3.2 Performances normalisées (0-1):
+{df_perf_norm.to_string()}
+
+─────────────────────────────────────────────────────────────
+4. MATRICES DE CONCORDANCE ET DISCORDANCE
+─────────────────────────────────────────────────────────────
+
+4.1 Matrice de concordance:
+{df_conc.to_string()}
+
+4.2 Matrice de discordance:
+{df_disc.to_string()}
+
+─────────────────────────────────────────────────────────────
+5. SURCLASSEMENTS
+─────────────────────────────────────────────────────────────
+
+5.1 Surclassement FORT (S⁺):
+{df_s_fort.to_string()}
+
+Nombre de relations fortes: {int(nb_fort)}
+
+5.2 Surclassement FAIBLE (S⁻):
+{df_s_faible.to_string()}
+
+Nombre de relations faibles: {int(nb_faible)}
+
+─────────────────────────────────────────────────────────────
+6. RELATIONS ET CLASSEMENT
+─────────────────────────────────────────────────────────────
+
+6.1 Relations entre alternatives:
+{df_relations.to_string(index=False) if len(df_relations) > 0 else "Aucune relation identifiée"}
+
+6.2 Classement final:
+{df_scores.to_string(index=False)}
+
+─────────────────────────────────────────────────────────────
+7. NOYAU (ALTERNATIVES NON DOMINÉES)
+─────────────────────────────────────────────────────────────
+
+Alternatives dans le noyau: {', '.join(noyau) if len(noyau) > 0 else 'Aucune'}
+
+{df_noyau.to_string(index=False)}
+
+─────────────────────────────────────────────────────────────
+8. CONCLUSION
+─────────────────────────────────────────────────────────────
+
+ MEILLEURE ALTERNATIVE: {meilleure['Alternative']}
+   • Score net: {int(meilleure['Score'])}
+   • Domine: {int(meilleure['Domine'])} alternatives
+   • Dominé par: {int(meilleure['Dominé_par'])} alternatives
+
+Statistiques des relations:
+   • Préférences (P): {nb_preferences}
+   • Indifférences (I): {nb_indifferences}
+   • Incomparabilités (R): {nb_incomparables}
+
+═══════════════════════════════════════════════════════════
+Analyse réalisée avec MCDA App - AHP & ELECTRE II
+Développé par: SERHANE Firdaws, BOURCHAK Mehdi, TOURATI Ahmed
+Encadré par: Pr. BOUANANI Hicham
+═══════════════════════════════════════════════════════════
+"""
+                
+                st.download_button(
+                    label=" Télécharger Rapport (.txt)",
+                    data=rapport_text,
+                    file_name="rapport_electre2.txt",
+                    mime="text/plain",
+                    use_container_width=True,
+                    type="primary"
+                )
+                
+                st.info("💡 **Note**: Le fichier .txt peut être converti en PDF avec n'importe quel éditeur de texte ou outil en ligne")
+            
+            with tab_export3:
+                st.markdown("#### Export JSON (données structurées)")
+                st.markdown("Format JSON pour intégration avec d'autres outils ou scripts Python")
+                
+                # Créer un dictionnaire avec tous les résultats
+                resultats_json = {
+                    "metadata": {
+                        "date": pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S'),
+                        "methode": "ELECTRE II",
+                        "n_alternatives": n_alternatives,
+                        "n_criteres": n_criteres
+                    },
+                    "parametres": {
+                        "seuils": {
+                            "c1": c1,
+                            "d1": d1,
+                            "c2": c2,
+                            "d2": d2
+                        }
+                    },
+                    "criteres": {
+                        "noms": noms_criteres,
+                        "poids": poids,
+                        "sens_optimisation": sens_optimisation
+                    },
+                    "alternatives": {
+                        "noms": noms_alternatives,
+                        "performances_brutes": performances,
+                        "performances_normalisees": performances_norm.tolist()
+                    },
+                    "matrices": {
+                        "concordance": concordance.tolist(),
+                        "discordance": discordance.tolist(),
+                        "surclassement_fort": S_fort.tolist(),
+                        "surclassement_faible": S_faible.tolist()
+                    },
+                    "resultats": {
+                        "classement": df_scores.to_dict('records'),
+                        "relations": df_relations.to_dict('records') if len(df_relations) > 0 else [],
+                        "noyau": noyau,
+                        "meilleure_alternative": {
+                            "nom": meilleure['Alternative'],
+                            "score": int(meilleure['Score']),
+                            "domine": int(meilleure['Domine']),
+                            "domine_par": int(meilleure['Dominé_par'])
+                        }
+                    },
+                    "statistiques": {
+                        "nb_relations_fortes": int(nb_fort),
+                        "nb_relations_faibles": int(nb_faible),
+                        "nb_preferences": nb_preferences,
+                        "nb_indifferences": nb_indifferences,
+                        "nb_incomparables": nb_incomparables,
+                        "taille_noyau": len(noyau)
+                    }
+                }
+                
+                json_string = json.dumps(resultats_json, indent=2, ensure_ascii=False)
+                
+                st.download_button(
+                    label=" Télécharger JSON (.json)",
+                    data=json_string,
+                    file_name="resultats_electre2.json",
+                    mime="application/json",
+                    use_container_width=True,
+                    type="primary"
+                )
+                
+                st.success("✅ **Format JSON** idéal pour :")
+                st.markdown("""
+                - Intégration avec Python/R
+                - Archivage des résultats
+                - Comparaison avec d'autres analyses
+                - Traitement automatisé
+                """)
+                
+                # Aperçu du JSON
+                with st.expander(" Aperçu du JSON"):
+                    st.json(resultats_json)
+            
+            st.markdown("---")
+            
+            # Export du graphique
+            st.markdown("####  Export du graphique de surclassement")
+            
+            col_graph1, col_graph2 = st.columns(2)
+            
+            with col_graph1:
+                # Export PNG
+                try:
+                    img_bytes_png = fig_graphe.to_image(format="png", width=1200, height=800, scale=2)
+                    st.download_button(
+                        label=" Télécharger Graphique (.png)",
+                        data=img_bytes_png,
+                        file_name="graphe_surclassement.png",
+                        mime="image/png",
+                        use_container_width=True
+                    )
+                except:
+                    st.warning("⚠️ Export PNG nécessite kaleido: `pip install kaleido`")
+            
+            with col_graph2:
+                # Export HTML interactif
+                html_bytes = fig_graphe.to_html(include_plotlyjs='cdn').encode()
+                st.download_button(
+                    label=" Télécharger Graphique Interactif (.html)",
+                    data=html_bytes,
+                    file_name="graphe_surclassement.html",
+                    mime="text/html",
+                    use_container_width=True
+                )
 
 st.markdown("---")
-st.markdown("💡 **Astuce** : Importez vos données → AHP → Ajustez avec drag-and-drop → ELECTRE II avec flèches")
+st.markdown("💡 **Astuce** : Importez vos données → AHP  → ELECTRE II ")
 st.markdown("Développé avec SERHANE Firdaws - BOURCHAK Mehdi - TOURATI Ahmed | Encadré par Pr. BOUANANI Hicham | 2025-2026")
 st.markdown("firdaws.serh@gmail.com | mhdbourchak@gmail.com | ahmedtourati7@gmail.com")
-
