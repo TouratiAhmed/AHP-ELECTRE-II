@@ -1704,8 +1704,8 @@ elif methode == " ELECTRE II":
                 st.markdown("**Performances normalisées (0-1)**")
                 df_perf_norm = pd.DataFrame(performances_norm, columns=noms_criteres, index=noms_alternatives)
                 st.dataframe(df_perf_norm.style.format("{:.4f}").background_gradient(cmap="RdYlGn", axis=0), use_container_width=True)
-                st.caption(" Valeurs normalisées(pour les critères max ↑) : 1 = meilleur, 0 = pire ")
-                st.caption(" Valeurs normalisées(pour les critères min ↓) : 0 = meilleur, 1 = pire ")
+                st.caption(" Valeurs normalisées : 1 = meilleur, 0 = moins bon (pour tous les critères)")
+                
             st.markdown("---")
             
             # Étape 2 : Concordance
@@ -2181,3 +2181,4 @@ st.markdown("---")
 st.markdown("💡 **Astuce** : Importez vos données → AHP  → ELECTRE II ")
 st.markdown("Développé avec SERHANE Firdaws - BOURCHAK Mehdi - TOURATI Ahmed | Encadré par Pr. BOUANANI Hicham | 2025-2026")
 st.markdown("firdaws.serh@gmail.com | mhdbourchak@gmail.com | ahmedtourati7@gmail.com")
+
